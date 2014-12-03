@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Nov 29 21:17:06 2014
-
+Inspired by Jon Claerbout
 @author: yuhao
 """
 

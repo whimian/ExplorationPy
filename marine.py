@@ -22,6 +22,7 @@ def mat_mult(adj, add, B, x, nx, y, ny):
                 y[iy] += B[iy, ix] * x[ix]
                 
 # first derivative one dimension
+#
 def igrad1(adj, add, xx, n, yy):
     for i in range(1,n-1,1):
         if adj == False:
@@ -29,3 +30,20 @@ def igrad1(adj, add, xx, n, yy):
         else:
             xx[i+1] = xx[i+1] + yy[i]
             xx[i] = xx[i] - yy[i]
+
+# linear moveout
+#
+def lmo(adj, add, slowness, tau0, t0, dt, x0, dx, modl, nt, nx, data):
+    for ix in range(1,nx,1):
+        x = x0 + dx * (ix - 1)
+        for it in range(1,nt,1):
+            t = t0 + dt * (it - 1)
+            tau =  t - x * slowness
+            iu = 1.5001 + (tau-tau0)/dt
+            if 0 < iu and iu <= nt:
+                if adj == 0:
+                    data[it,ix] = data[it,ix] + modl[iu,ix]
+                else:
+                    modl[iu,ix] = modl[iu,ix] + data[it,ix]
+            
+            

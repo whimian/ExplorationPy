@@ -9,7 +9,7 @@ import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from marine import marine_hyperbola
+from marine import hyperbola
 
 nz = 50
 depth = np.zeros(nz)
@@ -34,7 +34,7 @@ for i_s in range(ny): #shots
             i_y = (ny -1 -i_s) + (i_h - 1) #y = midpoint
             i_y = (i_y + 1) % ny
 #            i_t = 1 + np.sqrt(depth[i_z]**2 + 25.0*(i_h-1)**2)
-            i_t = marine_hyperbola(depth[i_z], i_h)
+            i_t = hyperbola(depth[i_z], i_h)
             if i_t < nt:
                 data[i_t,i_h,i_s] = data[i_t,i_h,i_s] + refl[i_z,i_y]
 plt.imshow(data[:,:,35], cmap = cm.gray)

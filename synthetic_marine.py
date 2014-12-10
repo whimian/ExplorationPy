@@ -10,6 +10,7 @@ import scipy as sp
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from marine import hyperbola
+from marine import wiggle
 
 nz = 50
 depth = np.zeros(nz)
@@ -37,5 +38,8 @@ for i_s in range(ny): #shots
             i_t = hyperbola(depth[i_z], i_h)
             if i_t < nt:
                 data[i_t,i_h,i_s] = data[i_t,i_h,i_s] + refl[i_z,i_y]
-plt.imshow(data[:,:,35], cmap = cm.gray)
-plt.show()
+#plt.imshow(data[:,:,40], cmap = cm.gray)
+#plt.show()
+SH = {'ns':60, 'ntraces':60, 'filename':'abc'}
+k = data[:,:,40]
+wiggle(data[:,:,40],SH)

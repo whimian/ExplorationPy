@@ -5,6 +5,7 @@ Created on Sun Nov 30 20:37:55 2014
 @author: yuhao
 """
 import numpy as np
+import pylab as pl
 
 # hyperbola
 #
@@ -45,5 +46,26 @@ def lmo(adj, add, slowness, tau0, t0, dt, x0, dx, modl, nt, nx, data):
                     data[it,ix] = data[it,ix] + modl[iu,ix]
                 else:
                     modl[iu,ix] = modl[iu,ix] + data[it,ix]
-            
-            
+                    
+# variable area wiggle trace    
+#
+def wiggle(Data,SH,skipt=1,maxval=8,lwidth=.1):
+    """
+    wiggle(Data,SH)
+    """    
+    t = range(SH['ns'])
+    for i in range(0,SH['ntraces'],skipt):
+        trace=Data[:,i]
+        trace[0]=0
+        trace[SH['ns']-1]=0
+        pl.plot(i+trace/maxval,t,color='black',linewidth=lwidth)
+        #pl.gca().invert_yaxis()
+        for a in range(len(trace)):
+            if (trace[a]<0):
+                trace[a]=0;
+		# pylab.fill(i+Data[:,i]/maxval,t,color='k',facecolor='g')
+        pl.fill(i+Data[:,i]/maxval,t,'k',linewidth=0)
+    pl.title(SH['filename'])
+    pl.grid(True)
+    pl.gca().invert_yaxis()
+    pl.show()

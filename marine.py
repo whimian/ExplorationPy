@@ -69,3 +69,24 @@ def wiggle(Data,SH,skipt=1,maxval=8,lwidth=.1):
     pl.grid(True)
     pl.gca().invert_yaxis()
     pl.show()
+    
+# ricker wavelet
+def ricker(dt, fdom, tlength):
+#    if(nargin<3):
+#        tlength=127.*dt
+#    if(nargin<2):
+#        fdom=15.0
+# create a time vector
+    nt = np.round(tlength/dt) + 1
+    tmin= -dt * np.round(nt/2)
+    #tw=tmin+dt*(0:nt-1)'
+    tw = tmin + dt*np.arange(nt)
+# create the wavelet
+    pf=np.pi**2*fdom**2;
+    wavelet=(1-2.*pf*tw**2)*np.exp(-pf*tw**2)
+    
+    re = {'tw':tw, 'wavelet':wavelet}
+    return re
+# normalize
+# generate a refenence sinusoid at the dominant frequency
+#wavelet=wavenorm(wavelet,tw,2);

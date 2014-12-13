@@ -14,18 +14,28 @@ def raytrace(Vp, Vs, rho, thic, offset):
         for io in range(len(offset)): #for each offset      
             err = offset[io]
             counter = 0
-            p0 = np.sqrt(np.pi/4.0) / Vp[0]
-            flag = False            
+            p0 = np.sin(np.pi/4.0) / Vp[0]
+            flag = False
             while err > 0.01* offset[io]:
                 y0 = 0                
-                for i in range(ii):
-                    y0 += (thic(i) * Vp[i] * p0) / (np.sqrt(1 - Vp[i]**2 * p0**2))
+                for i in range(ii + 1):
+                    y0 += (thic[i] * Vp[i] * p0) / np.sqrt(1 - Vp[i]**2 * p0**2)
+                
                 ydelta = offset[io] - y0
+                
                 pg = 0 # gradient of p relate to y
-                for i in range(ii):
-                    pg += (thic(i) * Vp[i]) / ((1 - Vp[i]**2 * p0**2)**(1.5))
+                for i in range(ii + 1):
+                    pg += (thic[i] * Vp[i]) / ((1 - Vp[i]**2 * p0**2)**(1.5))
+                pg = pg**(-1)
+                
                 p0 += pg * ydelta # corrected p
-                err = np.abs(p0 - offset[io])
+                
+                y = 0                
+                for i in range(ii + 1):
+                    y += (thic[i] * Vp[i] * p0) / np.sqrt(1 - Vp[i]**2 * p0**2)
+
+                err = np.abs(y - offset[io])
+
                 counter += 1
                 if counter == 100:
                     flag = True
@@ -34,3 +44,4 @@ def raytrace(Vp, Vs, rho, thic, offset):
                 pm[ii,io] = np.NaN
             else:
                 pm[ii,io] = p0
+    return pm

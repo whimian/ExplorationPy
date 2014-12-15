@@ -21,4 +21,11 @@ offset = [25, 50, 75, 100, 125]
 #vp=[1500, 1600, 2000, 2250, 2700, 2100, 3200, 3750, 4000, 4200]
 ppp = raytrace(vp, thic, offset)
 
-a = rc.raytrace(vp, thic, offset)
+a = rc.Raytrace()
+a.offset = offset
+a.Vp = vp
+print a.Vp
+a.thic = thic
+a.raytrace()
+print a.pm
+kkk = a.pm

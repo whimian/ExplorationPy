@@ -6,9 +6,8 @@ Created on Fri Dec 12 16:13:29 2014
 """
 import numpy as np
 
-class raytrace:
+class Raytrace():
     Vp = []
-    rho =[]
     thic = []
     offset = []
     pm = []
@@ -24,7 +23,7 @@ class raytrace:
 #        rho = self.rho
         offset = self.offset
         
-        pm = np.zeros((len(thic),len(offset)))
+        self.pm = np.zeros((len(thic),len(offset)))
     
         for ii in range(len(thic)): #for each interface    
             for io in range(len(offset)): #for each offset      
@@ -60,6 +59,6 @@ class raytrace:
                         flag = True
                         break
                 if flag == True:
-                    pm[ii,io] = np.NaN
+                    self.pm[ii,io] = np.NaN
                 else:
-                    pm[ii,io] = p0
+                    self.pm[ii,io] = p0

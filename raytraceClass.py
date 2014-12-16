@@ -29,7 +29,7 @@ class Raytrace():
             for io in range(len(offset)): #for each offset      
                 err = offset[io]
                 counter = 0
-                p0 = np.sin(np.pi/4) / Vp[0]                      
+                p0 = np.sin(np.pi/4) / Vp[ii]                      
                 flag = False
                 while err > 0.01* offset[io]:
                     y0 = 0                

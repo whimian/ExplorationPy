@@ -9,7 +9,7 @@ import numpy as np
 def raytrace(Vp, thic, offset):
     
     pm = np.zeros((len(thic),len(offset)))
-    
+    tm = np.zeros((len(thic),len(offset)))
     for ii in range(len(thic)): #for each interface    
         for io in range(len(offset)): #for each offset      
             err = offset[io]
@@ -47,4 +47,13 @@ def raytrace(Vp, thic, offset):
                 pm[ii,io] = np.NaN
             else:
                 pm[ii,io] = p0
-    return pm
+                
+    for ii in range(len(thic)): #for each interface    
+        for io in range(len(offset)): #for each offset 
+            traveltime = 0
+            p = pm[ii, io]
+            for i in range(ii + 1):
+                traveltime = traveltime + 2 * thic[i] / (Vp[i] *  np.sqrt(1 - Vp[i]**2 * p**2))
+            tm[ii, io] = traveltime
+            
+    return pm, tm

@@ -6,6 +6,15 @@ Created on Wed Dec 17 14:53:12 2014
 """
 
 def zoeppritz(vp1, vp2, vs1, vs2, rho1, rho2, p):
+    """
+    vp1: compressional wave velocity in upper layer
+    vp2: compressional wave velocity in lower layer
+    vs1: shear wave velocity in upper layer 
+    vs2: shear wave velocity in lower layer
+    rho1: density of upper layer
+    rho2: density of lower layer
+    p: ray parameter    
+    """
     q = 2 * (rho2 * vs2**2 - rho1 * vs1**2)
     X = rho2 - q * p**2
     Y = rho1 + q * p**2

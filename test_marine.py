@@ -6,7 +6,7 @@ Created on Wed Dec 03 16:53:04 2014
 """
 
 import numpy as np
-import scipy as sp
+#import scipy as sp
 import matplotlib.pyplot as plt
 import marine as ma
 import raytrace 
@@ -30,10 +30,15 @@ re = ma.ricker(dt, fdom, tlength)
 tw = re['tw']
 wavelet = re['wavelet']
 
-t = np.arange(0,30,0.01)
-plt.plot(t, np.sin(2*t))
-plt.show()
-#spp = np.fft.fft(np.sin(2*t))
-#freq = np.fft.fftfreq(t.shape[-1])
+#t = np.arange(0,10,0.01)
+##plt.plot(t, np.sin(2*t))
+##plt.show()
+#x = np.sin(2 * np.pi * 10 * t)
+#plt.plot(t, x)
+#plt.show()
+#spp = np.fft.fft(x)
+#freq = np.fft.fftfreq(t.shape[-1], d=0.01)
+#plt.figure()
 #plt.plot(freq, spp.real)#, freq, spp.imag
 #plt.show()
+

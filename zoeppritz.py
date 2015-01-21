@@ -5,7 +5,7 @@ Created on Wed Dec 17 14:53:12 2014
 @author: yuhao
 """
 
-def zoeppritz(vp1, vp2, vs1, vs2, rho1, rho2, p):
+def zoeppritz(vp1, vp2, vs1, vs2, rho1, rho2, p, flag):
     """
     vp1: compressional wave velocity in upper layer
     vp2: compressional wave velocity in lower layer
@@ -42,5 +42,7 @@ def zoeppritz(vp1, vp2, vs1, vs2, rho1, rho2, p):
     rpp = Nr / D
     
     tpp = Nt / D
-    
-    return rpp, tpp
+    if flag == 'r':
+        return rpp
+    else:
+        return tpp

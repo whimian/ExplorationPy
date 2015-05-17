@@ -1,8 +1,6 @@
 import numpy as np
-# import marine as ma
 import matplotlib.pyplot as plt
 
-t = np.r_[0:0.5:1000j]
 
 def heaviside(t):
     return 0.5 * (np.sign(t) + 1)
@@ -19,7 +17,7 @@ def ricker(t, fm, tm, R, v):
 #     w[i] = ricker(t[i], 30., 0.03, 400., 2000.)
 
 # plt.plot(t, w)
-
+t = np.r_[0:0.5:1000j]
 r = np.r_[-500:500:501j]
 z = np.r_[0:2000:1001j]
 t = np.r_[0:0.6:0.003]
@@ -31,6 +29,7 @@ dr = 2
 dz = 2
 dt = 0.003
 
+# normal finite difference
 A = np.zeros((len(r), len(z), len(t)))
 B = np.zeros((len(r), len(z), len(t)))
 for p in range(1, nt-1):

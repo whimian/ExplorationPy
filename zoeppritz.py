@@ -13,18 +13,27 @@ def zoeppritz(vp1, vp2, vs1, vs2, rho1, rho2, p, flag='r'):
 
     Parameters
     ----------
-    vp1: compressional wave velocity in upper layer
-    vp2: compressional wave velocity in lower layer
-    vs1: shear wave velocity in upper layer
-    vs2: shear wave velocity in lower layer
-    rho1: density of upper layer
-    rho2: density of lower layer
-    p: ray parameter
-    flag: r = reflection, else = refraction
+    vp1 : float
+        compressional wave velocity in upper layer
+    vp2 : float
+        compressional wave velocity in lower layer
+    vs1 : float
+        shear wave velocity in upper layer
+    vs2 : flaot
+        shear wave velocity in lower layer
+    rho1 : float
+        density of upper layer
+    rho2 : float
+        density of lower layer
+    p : float
+        ray parameter
+    flag : string
+        r = reflection, else = refraction
 
     Returns
     -------
-    reflection or refraction coefficient
+    out : float
+        reflection or refraction coefficient
     """
 
     # try:

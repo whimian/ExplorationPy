@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 22 16:07:53 2015
-
-@author: yuhao
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 from zoeppritz import zoeppritz as zo
@@ -34,9 +27,9 @@ def zApp(*args, **kwargs):
     return co
 
 if __name__ == '__main__':
-#    parameter = {'vp1': 1500, 'vp2': 2000, 'vs1': 1500,
-#                 'vs2': 1600, 'rho1': 2.3, 'rho2': 2.7,
-#                 'flag': 'r'}
+    #    parameter = {'vp1': 1500, 'vp2': 2000, 'vs1': 1500,
+    #                 'vs2': 1600, 'rho1': 2.3, 'rho2': 2.7,
+    #                 'flag': 'r'}
 
     coefficient = zApp(vp1=1500, vp2=2000, vs1=1500,
                        vs2=1600, rho1=2.3, rho2=2.7, flag='r')

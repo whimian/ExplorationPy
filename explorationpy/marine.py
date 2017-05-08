@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Collections of routines for exploration seismology
+
+Modifed on Mon May 08 2017
+"""
+from __future__ import division, print_function, absolute_import
+
+__author__ = "yuhao"
+
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-def hyperbola(a, b):
-    return 1 + np.sqrt(a**2 + 25.0*(b-1)**2)
 
 
 def mat_mult(adj, add, B, x, nx, y, ny):
@@ -44,22 +50,22 @@ def lmo(adj, add, slowness, tau0, t0, dt, x0, dx, modl, nt, nx, data):
 def wiggle(Data, SH, skipt=1, maxval=8, lwidth=.1):
     """variable area wiggle trace
     """
+    fig, ax = plt.subplots()
     t = range(SH['ns'])
     for i in range(0, SH['ntraces'], skipt):
         trace = Data[:, i]
         trace[0] = 0
         trace[SH['ns'] - 1] = 0
-        plt.plot(i + trace/maxval, t, color='black', linewidth=lwidth)
-        # pl.gca().invert_yaxis()
+        ax.plot(i + trace/maxval, t, color='black', linewidth=lwidth)
         for a in range(len(trace)):
             if trace[a] < 0:
                 trace[a] = 0
-    # pylab.fill(i+Data[:,i]/maxval,t,color='k',facecolor='g')
-    plt.fill(i+Data[:, i]/maxval, t, 'k', linewidth=0)
-    plt.title(SH['filename'])
-    plt.grid(True)
-    plt.gca().invert_yaxis()
-    plt.show()
+    ax.fill(i+Data[:, i]/maxval, t, 'k', linewidth=0)
+    ax.set(ylim=(np.max(t), 0))
+    ax.title(SH['filename'])
+    ax.grid(True)
+    ax.invert_yaxis()
+    ax.show()
 
 
 def ricker(dt, fdom, tlength):

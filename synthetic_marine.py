@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Nov 29 21:17:06 2014
+A random jumble of point scatters in a constant-velocity medium.
 
-Inspired by Jon Claerbout
+from Imaging the Earth Interior by Claerbout
+
+Created on Sat Nov 29 21:17:06 2014
 """
 from __future__ import division, print_function, absolute_import
 
@@ -14,17 +16,23 @@ from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
-
-from explorationpy.marine import hyperbola
 from explorationpy.marine import wiggle
 from explorationpy.vawt import wiggles
+
+
+def hyperbola(depth, cdp, trace_interval=25.0):
+    """
+    travel time index given a constant velocity
+    """
+    return np.sqrt(depth**2 + trace_interval*cdp**2)
+
 
 if __name__ == "__main__":
     nz = 50
     depth = np.zeros(nz)
     ny = 60
     refl = np.zeros((nz,ny))
-    nh = 60
+    nh = 30
     nt = 60
     ns = ny
     data = np.zeros((nt, nh, ny))
@@ -38,9 +46,9 @@ if __name__ == "__main__":
         for i_h in range(nh):  # down cable h = (g-s)/2
             twt = np.zeros((nz,))
             tr_data_z = np.zeros_like(twt)
+            i_y = (ns - i_s) + (i_h)  # y = midpoint
+            i_y = i_y - ny * (i_y // ny)  # periodic with midpoint
             for i_z in range(nz):  # add hyperbola
-                i_y = (ny - 1 - i_s) + (i_h - 1)  # y = midpoint
-                i_y = (i_y + 1) % ny
                 i_t = hyperbola(depth[i_z], i_h)
                 twt[i_z] = i_t
                 tr_data_z[i_z] = refl[i_z, i_y]
@@ -48,11 +56,9 @@ if __name__ == "__main__":
             tr_data_twt = func(np.arange(0, nt))
             data[:, i_h, i_s] += tr_data_twt
 
-    #plt.imshow(data[:,:,40], cmap = cm.gray)
-    #plt.show()
-    SH = {'ns':60, 'ntraces':60, 'filename':'abc'}
-    k = data[:,:,40]
-    # wiggle(data[:,:,40],SH)
+    # SH = {'ns':60, 'ntraces':60, 'filename':'abc'}
+    # k = data[:, :, 40]
+    # # wiggle(data[:,:,40],SH)
 
     fig, ax = plt.subplots()
 

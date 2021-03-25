@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 
 def mat_mult(adj, add, B, x, nx, y, ny):
     "matrix multiplication and its joint"
-    for ix in xrange(nx):
-        for iy in xrange(ny):
+    for ix in range(nx):
+        for iy in range(ny):
             if adj is True:
                 x[ix] += B[iy, ix] * y[iy]
             else:
@@ -24,7 +24,7 @@ def mat_mult(adj, add, B, x, nx, y, ny):
 
 def igrad1(adj, add, xx, n, yy):
     "1-D first derivative"
-    for i in xrange(1, n-1):
+    for i in range(1, n-1):
         if adj is False:
             yy[i] = yy[i] + xx[i+1] - xx[i]
         else:

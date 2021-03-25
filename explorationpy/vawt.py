@@ -86,7 +86,7 @@ class Wiggles(object):
         if self.ax is None:
             fig, self.ax = plt.subplots()
         self.ax.invert_yaxis()
-        self.ax.set(xlim=[xmin, xmax], ylim=[ymin, ymax]) # xrange should be larger!!!
+        self.ax.set(xlim=[xmin, xmax], ylim=[ymin, ymax]) # range should be larger!!!
         ny, nx = self.data.shape
         x_loc = np.linspace(xmin, xmax, nx)
         for i in range(self.wiggleInterval//2, nx, self.wiggleInterval):
@@ -213,7 +213,7 @@ def wiggles(data, wiggleInterval=10, overlap=1, posFill='black',
     if ax is None:
         fig, ax = plt.subplots()
     ax.invert_yaxis()
-    ax.set(xlim=[xmin, xmax], ylim=[ymin, ymax]) # xrange should be larger!!!
+    ax.set(xlim=[xmin, xmax], ylim=[ymin, ymax]) # range should be larger!!!
     ny, nx = data.shape
     x_loc = np.linspace(xmin, xmax, nx)
     for i in range(wiggleInterval//2, nx, wiggleInterval):

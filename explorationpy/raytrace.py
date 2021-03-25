@@ -40,8 +40,8 @@ def raytrace(velocity, thickness, offset):
     n = len(offset)
     pm = np.zeros((m, n))
     tm = np.zeros((m, n))
-    for ii in xrange(m):  # for each interface
-        for io in xrange(n):  # for each offset
+    for ii in range(m):  # for each interface
+        for io in range(n):  # for each offset
             err = offset[io]
             counter = 0
             p0 = np.sin(np.pi/4) / velocity[ii]
@@ -49,7 +49,7 @@ def raytrace(velocity, thickness, offset):
             while err > 0.01 * offset[io]:
                 # deviation from target using p0
                 y0 = 0
-                for i in xrange(ii + 1):
+                for i in range(ii + 1):
                     y0 += (thickness[i] * velocity[i] * p0) / np.sqrt(1 - velocity[i]**2 * p0**2)
                 y0 = 2 * y0
                 ydelta = offset[io] - y0
@@ -73,8 +73,8 @@ def raytrace(velocity, thickness, offset):
                     break
             pm[ii, io] = p0
     # Calculate Travel time along specific trace
-    for ii in xrange(m):  # for each interface
-        for io in xrange(n):  # for each offset
+    for ii in range(m):  # for each interface
+        for io in range(n):  # for each offset
             traveltime = 0
             p = pm[ii, io]
             for i in range(ii + 1):

@@ -18,6 +18,7 @@ import matplotlib.cm as cm
 
 from explorationpy.marine import wiggle
 from explorationpy.vawt import wiggles
+from explorationpy.vawt import Wiggles
 
 
 def hyperbola(depth, cdp, trace_interval=25.0):
@@ -63,4 +64,8 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
 
     wiggles(data[:, :, 40], wiggleInterval=1, ax=ax)
+    # vawt = Wiggles(data[:, :, 40])
+    # vawt.wiggleInterval = 1
+    # vawt.ax = ax
+    # vawt.wiggles()
     plt.show()

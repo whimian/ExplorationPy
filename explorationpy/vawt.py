@@ -10,14 +10,89 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import cspline1d, cspline1d_eval
 
-# class Wtva(object):
-#     def __init__(self):
-#         self.origin = 0
-#         self.posFill = 'black'
-#         self.negFill = None
-#         self.lineColor = None
-#         self.resampleRatio = 10
-#         self.rescale = rescale
+
+class Wiggles(object):
+    def __init__(self, data, wiggleInterval=10, overlap=1, posFill='black',
+                 negFill=None, lineColor='black', rescale=True, extent=None, ax=None):
+        self.data = data
+        self.origin = 0
+        self.posFill = 'black'
+        self.negFill = None
+        self.lineColor = None
+        self.resampleRatio = 10
+        self.rescale = True
+        self.zmin = 0
+        self.zmax = None
+        self.ax = ax
+        self.extent = extent
+        self.wiggleInterval = wiggleInterval
+        self.overlap = overlap
+
+    def wiggle(self, values):
+        """
+        Plot a trace in VAWT(Variable Area Wiggle Trace)
+        """
+        if self.zmax is None:
+            self.zmax = values.size
+
+        # Rescale so that values ranges from -1 to 1
+        if self.rescale:
+            values = values.astype(np.float)
+            values -= values.min()
+            values /= values.ptp()
+            values *= 2
+            values -= 1
+
+        # Interpolate at resampleRatio x the previous density
+        resample_z = np.linspace(0, values.size, values.size * self.resampleRatio)
+        # cubic spline interpolation
+        cj = cspline1d(values)
+        resample_v = cspline1d_eval(cj, resample_z)
+        print(resample_v)
+        newz = resample_z
+        if self.origin == None:
+            self.origin = resample_v.mean()
+
+        # Plot
+        if self.posFill is not None:
+            self.ax.fill_betweenx(newz, resample_v, self.origin,
+                                  where=resample_v > self.origin,
+                                  facecolor=self.posFill)
+        if self.negFill is not None:
+            self.ax.fill_betweenx(newz, resample_v, self.origin,
+                                  where=resample_v < self.origin,
+                                  facecolor=self.negFill)
+        if self.lineColor is not None:
+            self.ax.plot(resample_v, newz, color=self.lineColor, linewidth=.1)
+
+    def wiggles(self):
+        """
+        2-D Wiggle Trace Variable Amplitude Plot
+        """
+        # Rescale so that the data ranges from -1 to 1
+        if self.rescale:
+            self.data = self.data.astype(np.float)
+            self.data -= self.data.min()
+            self.data /= self.data.ptp()
+            self.data *= 2
+            self.data -= 1
+
+        if self.extent is None:
+            xmin, ymin = 0, self.data.shape[0]
+            ymax, xmax = 0, self.data.shape[1]
+        else:
+            xmin, xmax, ymin, ymax = extent
+
+        if self.ax is None:
+            fig, self.ax = plt.subplots()
+        self.ax.invert_yaxis()
+        self.ax.set(xlim=[xmin, xmax], ylim=[ymin, ymax]) # xrange should be larger!!!
+        ny, nx = self.data.shape
+        x_loc = np.linspace(xmin, xmax, nx)
+        for i in range(self.wiggleInterval//2, nx, self.wiggleInterval):
+            x = self.overlap * (self.wiggleInterval / 2.0) * (x_loc[1] - x_loc[0]) * self.data[:, i]
+            self.wiggle(x + x_loc[i])
+
 
 def wiggle(values, origin=0, posFill='black', negFill=None, lineColor='black',
            resampleRatio=10, rescale=False, zmin=0, zmax=None, ax=None):

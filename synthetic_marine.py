@@ -6,10 +6,6 @@ from Imaging the Earth Interior by Claerbout
 
 Created on Sat Nov 29 21:17:06 2014
 """
-from __future__ import division, print_function, absolute_import
-
-__author__ = "yuhao"
-
 import numpy as np
 import scipy as sp
 from scipy.interpolate import interp1d
@@ -20,6 +16,7 @@ from explorationpy.marine import wiggle
 from explorationpy.vawt import wiggles
 from explorationpy.vawt import Wiggles
 
+__author__ = "yuhao"
 
 def hyperbola(depth, cdp, trace_interval=25.0):
     """

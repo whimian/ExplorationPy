@@ -2,15 +2,12 @@
 """
 Created on Apr. 26th 2017
 """
-from __future__ import absolute_import, division, print_function
-
-__author__ = "yuhao"
-
 from functools import partial
 
 import numpy as np
 from scipy.optimize import minimize
 
+__author__ = "yuhao"
 
 def raytrace(velocity, thickness, offset):
     """

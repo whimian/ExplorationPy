@@ -2,14 +2,11 @@
 """
 Created on Thu Apr 26 2017
 """
-from __future__ import division, print_function, absolute_import
-
-__author__ = "yuhao"
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import cspline1d, cspline1d_eval
 
+__author__ = "yuhao"
 
 class Wiggles(object):
     def __init__(self, data, wiggleInterval=10, overlap=1, posFill='black',

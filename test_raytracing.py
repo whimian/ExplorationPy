@@ -2,16 +2,12 @@
 """
 Created on Fri Dec 12 15:45:54 2014
 """
-from __future__ import absolute_import, division, print_function
-
-__author__ = "yuhao"
-
 import numpy as np
-
 import explorationpy.zoeppritz as z
 # from explorationpy.raytrace import raytrace
 from explorationpy.raytrace_optimize import raytrace
 
+__author__ = "yuhao"
 
 if __name__ == "__main__":
     vp = [1500, 2000, 2500, 3000, 3500]

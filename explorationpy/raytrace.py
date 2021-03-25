@@ -3,12 +3,9 @@
 Created in 2014
 Modifed on Apr. 26th 2017
 """
-from __future__ import absolute_import, division, print_function
-
-__author__ = "yuhao"
-
 import numpy as np
 
+__author__ = "yuhao"
 
 def raytrace(velocity, thickness, offset):
     """

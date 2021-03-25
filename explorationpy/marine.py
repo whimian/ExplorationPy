@@ -4,13 +4,10 @@ Collections of routines for exploration seismology
 
 Modifed on Mon May 08 2017
 """
-from __future__ import division, print_function, absolute_import
-
-__author__ = "yuhao"
-
 import numpy as np
 import matplotlib.pyplot as plt
 
+__author__ = "yuhao"
 
 def mat_mult(adj, add, B, x, nx, y, ny):
     "matrix multiplication and its joint"
